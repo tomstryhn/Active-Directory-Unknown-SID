@@ -102,7 +102,11 @@ Get-ADUser UserNameWithSIDHistory -Properties SIDHistory | Foreach-Object { Set-
 
 ```
 
-### Scripts / Modules
+### Scripts
+
+\<COMING SOON TO A REPO NEAR YOU>
+
+### Modules
 
 #### [ADObjectOwner](https://github.com/tomstryhn/ADObjectOwner)
 
