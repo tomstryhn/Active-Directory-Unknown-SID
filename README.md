@@ -14,7 +14,12 @@ Unknown SID, Orphaned SID or Unresolvable SID, all three terms cover the same is
     - [Audit your ACL's on a regular basis](#audit-your-acls-on-a-regular-basis)
   - [Toolbox](#toolbox)
     - [Basic PowerShell commands](#basic-powershell-commands)
-    - [Scripts / Modules](#scripts--modules)
+      - [SID lookup](#sid-lookup)
+      - [Getting ADObjects with a SIDHistory](#getting-adobjects-with-a-sidhistory)
+      - [Example: Removing the SIDHistory from an ADUser](#example-removing-the-sidhistory-from-an-aduser)
+    - [Scripts](#scripts)
+    - [Modules](#modules)
+      - [ADObjectOwner](#adobjectowner)
   - [Links](#links)
 
 ## What is an Unknown/Orphaned/Unresolvable SID?
