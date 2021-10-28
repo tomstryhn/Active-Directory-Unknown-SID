@@ -2,6 +2,24 @@
 
 Unknown SID, Orphaned SID or Unresolvable SID, all three terms cover the same issue, an issue that many AD Administrators, at some point have encountered and/or are battling with, not to mention the hassle to get them all cleared out. I will with along with this Guide supply some code and scripts that might help with this.
 
+# Table of Contents
+
+  - [What is an Unknown/Orphaned/Unresolvable SID?](#what-is-an-unknownorphanedunresolvable-sid)
+    - [Basic SID 101](#basic-sid-101)
+    - [How do they become Unknown/Orphaned/Unresolvable?](#how-do-they-become-unknownorphanedunresolvable)
+  - [Risk(s)](#risks)
+  - [Mitigation](#mitigation)
+    - [Documented processes on deleting objects in Active Directory](#documented-processes-on-deleting-objects-in-active-directory)
+    - [Remember to remove the SIDHistory from your Security Principals](#remember-to-remove-the-sidhistory-from-your-security-principals)
+    - [Audit your ACL's on a regular basis](#audit-your-acls-on-a-regular-basis)
+  - [Toolbox](#toolbox)
+    - [Basic PowerShell commands](#basic-powershell-commands)
+    - [Scripts](#scripts)
+  - [Links](#links)
+      - [<a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/78eb9013-1c3a-4970-ad1f-2b1dad588a25">[MS-DTYP]: SID | Microsoft Docs</a>](#ms-dtyp-sid--microsoft-docs)
+      - [ADSecurity](#adsecurity)
+      - [AD ACL Scanner](#ad-acl-scanner)
+
 ## What is an Unknown/Orphaned/Unresolvable SID?
 
 To understand what it is, you need to have a little insight, and first need to know what a SID is.
@@ -21,9 +39,9 @@ BinaryLength AccountDomainSid                         Value
 ```
 > This is a sample SID for the domain administrator of our fictive AD. (Tip: The builtin Administrator always ends with '-500')
 
-A SID uniquely identifies Security Principals, primarily *Computers*, *Groups* and *Users*, there are a few other objecttypes in your Active Directory that actually have objectsid's but for now we will focus on these primary three object types, since they are also the primary reason for our troubles. As seen on the PowerShell example above, the SID consists of two primary parts, the AccountDomainSid, which identifies the domain to which the object belongs, and the last part, which you could call the serial number for the Security Principal, which is unique in the domain. There are a few more technical details in regard to the SID, but if you want to know more, you can go to the Microsoft Docs for more information, in the [Links](#links) section.
+A SID uniquely identifies Security Principals, primarily *Computers*, *Groups* and *Users*, there are a few other object-types in your Active Directory that actually have objectsid's but for now we will focus on these three primary object types, since they are also the primary reason for our troubles. As seen on the PowerShell example above, the SID consists of two primary parts, the AccountDomainSid, which identifies the domain to which the object belongs, and the last part, which you could call the serial number for the Security Principal, which is unique in the domain. There are a few more technical details in regard to the SID, but if you want to know more, you can go to the Microsoft Docs for more information, in the [Links](#links) section.
 
-When referencing any of these Security Principals within the Domain, the SID will presented, and then 'looked up' through a Domain Controller, who will present the Identity related to the SID. Now, if the Domain Controller is not able to translate this SID into a Security Principal, I will just be displayed as the plain SID. Places where you normally see this is when you go into the Security Pane of your objects in your Active Directory Users and Computers console, here all it can be displayed either as just the SID, or as "Account Unknown(S-1-5-21-1234567890-123456789-1234567890-2535)".
+When referencing any of these Security Principals within the Domain, the SID will be used, and then 'looked up' through a Domain Controller, the Domain Controller will then return Security Principal related to the SID. Now, if the Domain Controller is not able to translate this SID into a Security Principal, I will just be displayed as the plain SID. Places where you 'often' see this, is when you go into the Security Pane of your objects in your Active Directory Users and Computers console, here it can be displayed either as just the SID, or as "Account Unknown(S-1-5-21-1234567890-123456789-1234567890-2535)".
 
 ### How do they become Unknown/Orphaned/Unresolvable?
 
@@ -43,7 +61,7 @@ By simply remembering to remove groupmemberships of an Security Principal, you m
 
 If you are a part of company that at some point in time have migrated either from one Active Directory to another, og if your company have merged with another company, and either migrated their Security Principals into your Active Directory, or the other way around, you should make sure that **ALL** the objects in your have had their SIDHistory cleared, since there no reason whatsoever, to not clearing the SIDHistory on the Security Principals in your Active Directory once a migration of Security Principals are complete.
 
-### Scan your ACL's on a regular basis
+### Audit your ACL's on a regular basis
 
 Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like AD ACL Scanner (link in the [Links](#links) section) and go through this list either manually or using a script. To identify all the ACL's of your Active Directory to both identify unresolved SIDs, but also to detect unwanted or unintented permission.
 
