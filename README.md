@@ -52,7 +52,7 @@ What are the risks associated with this? **Total Domain Domination!** is a possi
 
 ### Documented processes on deleting objects in Active Directory
 
-By for instance simply remembering to remove groupmemberships of an Security Principal you are deleting, you mitigate the former mentioned possibility of obtaining membership of an security group unnoticed, because by removing the memberships prior to deletion, the Security Principal is removed from the groups, not leaving an unresolved SID in the security groups, when it is deleted. So by having a documented process in creating and deleting users, and following it, you could actually mitigate a big part of the problem.
+By for instance simply remembering to remove groupmemberships of an Security Principal you are deleting, you mitigate the former mentioned possibility of obtaining membership of an security group unnoticed, because by removing the memberships prior to deletion, the Security Principal is removed from the groups, not leaving an unresolved SID in the security groups, when it is deleted. So by having a documented process in creating and deleting users, and following it, you could actually mitigate a big part of the problem in the future. This is one of the areas where it makes very good sense to automate the deleteing, by using as script, or task to make sure the process is the exact same every time.
 
 ### Remember to remove the SIDHistory from your Security Principals
 
