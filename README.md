@@ -63,7 +63,7 @@ If you are a part of company that at some point in time have migrated either fro
 
 ### Audit your ACL's on a regular basis
 
-Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like AD ACL Scanner (link in the [Links](#links) section) and go through this list either manually or using a script. To identify all the ACL's of your Active Directory to both identify unresolved SIDs, but also to detect unwanted or unintented permission.
+Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like AD ACL Scanner (link in the [Links](#links) section) and go through this list either manually or using a script. To identify all the ACL's of your Active Directory to both identify unresolved SIDs, but also to detect unwanted or unintented permission. When auditing the ACL's it's also worth looking for who Own's the different object, since the Owners have Delegate Permissions, and in migrated enviroments, the Owner is often a SID from the Active Directory, from where the object was migrated from.
 
 ## Toolbox
 
@@ -71,9 +71,11 @@ Finally, and this is the one, that will make you cry, you should on a regular ba
 
 \>TO COME SHORTLY<
 
-### Scripts
+### Scripts / Modules
 
-\>TO COME SHORTLY<
+#### [ADObjectOwner](https://github.com/tomstryhn/ADObjectOwner)
+
+A PowerShell module I have created, to help change the Owner of on or more Active Directory Objects. Keep in mind, that often are Permissions inherited, so the Owner of for instance an OU, are able to Delegate Permissions on that object, which could possible affect nested objects.
 
 ## Links
 
