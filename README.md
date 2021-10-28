@@ -15,11 +15,7 @@ Unknown SID, Orphaned SID or Unresolvable SID, all three terms cover the same is
   - [Toolbox](#toolbox)
     - [Basic PowerShell commands](#basic-powershell-commands)
     - [Scripts / Modules](#scripts--modules)
-      - [ADObjectOwner](#adobjectowner)
   - [Links](#links)
-      - [<a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/78eb9013-1c3a-4970-ad1f-2b1dad588a25">[MS-DTYP]: SID | Microsoft Docs</a>](#ms-dtyp-sid--microsoft-docs)
-      - [ADSecurity](#adsecurity)
-      - [AD ACL Scanner](#ad-acl-scanner)
 
 ## What is an Unknown/Orphaned/Unresolvable SID?
 
