@@ -60,7 +60,7 @@ If you are a part of company that at some point in time have migrated, either fr
 
 ### Audit your ACL's on a regular basis
 
-Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like AD ACL Scanner (link in the [Links](#links) section) and go through the report generated, either manually or using a script, to identify all the ACL's of your Active Directory with unresolved SIDs, but also to detect unwanted or unintented permission. When auditing the ACL's it's also worth looking for who Owners of the objects, since the Owners have permission to Delegate Permissions, and in migrated enviroments, the Owner is often a SID from the old Active Directory, from where the object was migrated from. I have another 'article' on this, [here](https://github.com/tomstryhn/ADObjectOwner).
+Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like AD ACL Scanner (link in the [Links](#links) section) and go through the report generated, either manually or using a script, to identify all the ACL's of your Active Directory with unresolved SIDs, but also to detect unwanted or unintented permission. When auditing the ACL's it's also worth looking for who Owners of the objects, since the Owners have permission to Delegate Permissions, and in migrated enviroments, the Owner is often a SID from the old Active Directory, from where the object was migrated. I have another 'article' on this, [here](https://github.com/tomstryhn/ADObjectOwner).
 
 ## Toolbox
 
