@@ -11,11 +11,13 @@ To understand what it is, you need to have a little insight, and first need to k
 SID - or the Security Identifier, is in short a unique identifier used in your Active Directory, among other places. Below is displayed the output when you get the SID from a ADUser, using PowerShell:
 
 ```PowerShell
+
 PS C:\> (Get-ADUser Administrator).SID
 
 BinaryLength AccountDomainSid                         Value                                       
 ------------ ----------------                         -----                                       
           28 S-1-5-21-1234567890-123456789-1234567890 S-1-5-21-1234567890-123456789-1234567890-500
+
 ```
 > This is a sample SID for the domain administrator of our fictive AD. (Tip: The builtin Administrator always ends with '-500')
 
@@ -35,7 +37,7 @@ What are the risks associated with this? **Total Domain Domination!** is a possi
 
 ### Documented processes on deleting objects in Active Directory
 
-By simply remembering to remove groupmemberships of an Security Principal, you mitigate the former mentioned possibility of obtaining membership of an security group unnoticed, because by removing the memberships prior to deletion, the Security Principal is removed from the groups, not leaving am unresolved SID in the security groups, when it is deleted. So by having a documented process in creating and deleting users, you could actually mitigate a big part of the problem.
+By simply remembering to remove groupmemberships of an Security Principal, you mitigate the former mentioned possibility of obtaining membership of an security group unnoticed, because by removing the memberships prior to deletion, the Security Principal is removed from the groups, not leaving an unresolved SID in the security groups, when it is deleted. So by having a documented process in creating and deleting users, and following it, you could actually mitigate a big part of the problem.
 
 ### Remember to remove the SIDHistory from your Security Principals
 
@@ -43,16 +45,25 @@ If you are a part of company that at some point in time have migrated either fro
 
 ### Scan your ACL's on a regular basis
 
-Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like ACLScanner (link in the [Links](#links) section) and go through this list either manually or using a script. To identify all the ACL's of your Active Directory to both identify unresolved SIDs, but also to detect unwanted or unintented permission.
+Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like AD ACL Scanner (link in the [Links](#links) section) and go through this list either manually or using a script. To identify all the ACL's of your Active Directory to both identify unresolved SIDs, but also to detect unwanted or unintented permission.
 
 ## Toolbox
 
+### Basic PowerShell commands
+
+\>TO COME SHORTLY<
+
+### Scripts
+
+\>TO COME SHORTLY<
+
 ## Links
 
-Be aware that due to the nature of Github, and the way their links work, these links will not open in a new window, unless you press <CTRL> while clicking them.
+Be aware that due to the nature of Github, and the way links work, these links will not open in a new window, unless you press \<CTRL> or \<SHIFT> while clicking them.
 
 #### <a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/78eb9013-1c3a-4970-ad1f-2b1dad588a25">[MS-DTYP]: SID | Microsoft Docs</a>
 Further reading on the Security Identifier (SID)
 #### [ADSecurity](https://adsecurity.org/?p=1772)
 Article on SID History injection
 #### [AD ACL Scanner](https://github.com/canix1/ADACLScanner)
+Great tool for auditing the ACL's in you Active Directory
