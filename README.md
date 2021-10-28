@@ -1,6 +1,6 @@
 # Active Directory Unknown SIDs
 
-Unknown SID, Orphaned SID or Unresolvable SID, all three terms cover the same issue, an issue that many AD Administrators, at some point have encountered and/or are battling with, not to mention the hassle to get them all cleared out. I will with along with this Guide supply some code and scripts that might help with this.
+Unknown SID, Orphaned SID or Unresolvable SID, all three terms cover the same issue, an issue that many AD Administrators, at some point have encountered and/or are battling with, not to mention the hassle to get them all removed. I will with this Guide try and cover some risks introduced by the Unknown SIDs, and supply with some code samples and scripts that might help you mitigating this risk.
 
 # Table of Contents
 
