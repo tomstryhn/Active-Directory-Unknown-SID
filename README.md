@@ -66,13 +66,47 @@ Finally, and this is the one, that will make you cry, you should on a regular ba
 
 ### Basic PowerShell commands
 
-\>TO COME SHORTLY<
+#### SID lookup
+
+A quick and easy way to check if a SID is resolveable, if the SID is resolveable it should look like the sample below, otherwise it will throw an error.
+
+```PowerShell
+
+PS C:\> $lookupSID = 'S-1-5-21-1234567890-123456789-1234567890-500'
+PS C:\> [ADSI]"LDAP://<SID=$lookupSID>"
+
+distinguishedName : {CN=Administrator,CN=Users,DC=YourDomain,DC=local}
+Path              : LDAP://<SID=S-1-5-21-1234567890-123456789-1234567890-500>
+
+PS C:\>
+
+```
+
+#### Getting ADObjects with a SIDHistory
+
+Oneliner for getting all ADObjects with SIDHistory
+
+```PowerShell
+
+Get-ADObject -Filter * -Properties SIDHistory | Where-Object { $_.SIDHistory }
+
+```
+
+#### Example: Removing the SIDHistory from an ADUser
+
+Remember to 'Log' all the ADObjects with SIDHistory, and save this list, for later use. In rare cases you could encounter that removing the SIDHistory will result in new unresolved SIDs, this happens when the SID in the SID History is referenced, in either a groupmembership or an ACL, this will theoretically happen, when for instance both security-groups and users have been migrated, then the security-groups could reference the old SID, and this reference would be valid, for as long as the old SID is defined in the SIDHistory of the migrated aduser.
+
+```PowerShell
+
+Get-ADUser UserNameWithSIDHistory -Properties SIDHistory | Foreach-Object { Set-ADUser $_ -Remove @{SIDHistory=$_.SIDHistory.Value} }
+
+```
 
 ### Scripts / Modules
 
 #### [ADObjectOwner](https://github.com/tomstryhn/ADObjectOwner)
 
-A PowerShell module I have created, to help change the Owner of on or more Active Directory Objects. Keep in mind, that often are Permissions inherited, so the Owner of for instance an OU, are able to Delegate Permissions on that object, which could possible affect nested objects.
+A PowerShell module I have created, to help change the Owner of on or more Active Directory Objects. Keep in mind, that often are permissions inherited, so the Owner of an OU, are able to Delegate Permissions on that object, which could possible be inherited to any underlying objects.
 
 ## Links
 
