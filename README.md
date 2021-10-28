@@ -110,7 +110,7 @@ Get-ADUser UserNameWithSIDHistory -Properties SIDHistory | Foreach-Object { Set-
 
 #### [ADObjectOwner](https://github.com/tomstryhn/ADObjectOwner)
 
-A PowerShell module I have created, to help change the Owner of on or more Active Directory Objects. Keep in mind, that often are permissions inherited, so the Owner of an OU, are able to Delegate Permissions on that object, which could possible be inherited to any underlying objects.
+A PowerShell module I have created, to help change the Owner of ono or more Active Directory Objects. Keep in mind, that often are permissions inherited, so the Owner of an OU, are able to Delegate Permissions on that object, which could possible be inherited to underlying objects.
 
 ## Links
 
