@@ -4,11 +4,11 @@ Unknown SID, Orphaned SID or Unresolvable SID, all three terms cover the same is
 
 ## What is an Unknown/Orphaned/Unresolvable SID?
 
-To understand what it is, you need to have a little insigth, and first need to know what a SID is.
+To understand what it is, you need to have a little insight, and first need to know what a SID is.
 
 ### Basic SID 101
 
-SID is an abbrevation for Security Identifier, below is displayed the SID for a ADUser, using PowerShell:
+SID - or the Security Identifier, is in short a unique identifier used in your Active Directory, among other places. Below is displayed the output when you get the SID from a ADUser, using PowerShell:
 
 ```PowerShell
 PS C:\> (Get-ADUser Administrator).SID
@@ -43,13 +43,14 @@ If you are a part of company that at some point in time have migrated either fro
 
 ### Scan your ACL's on a regular basis
 
-Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like ACLScanner (link in the [Links](#links) section) and go through this list
+Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like ACLScanner (link in the [Links](#links) section) and go through this list either manually or using a script. To identify all the ACL's of your Active Directory to both identify unresolved SIDs, but also to detect unwanted or unintented permission.
 
-##
+## Toolbox
 
 ## Links
 
 Be aware that due to the nature of Github, and the way their links work, these links will not open in a new window, unless you press <CTRL> while clicking them.
 
 #### <a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/78eb9013-1c3a-4970-ad1f-2b1dad588a25">[MS-DTYP]: SID | Microsoft Docs</a> - Further reading on the Security Identifier (SID)
-#### [ADSecurity: Article on SID History injection](https://adsecurity.org/?p=1772)
+#### [ADSecurity](https://adsecurity.org/?p=1772) - Article on SID History injection
+#### [AD ACL Scanner](https://github.com/canix1/ADACLScanner)
