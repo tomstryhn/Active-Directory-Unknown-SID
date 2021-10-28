@@ -51,6 +51,8 @@ Finally, and this is the one, that will make you cry, you should on a regular ba
 
 Be aware that due to the nature of Github, and the way their links work, these links will not open in a new window, unless you press <CTRL> while clicking them.
 
-#### <a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/78eb9013-1c3a-4970-ad1f-2b1dad588a25">[MS-DTYP]: SID | Microsoft Docs</a> - Further reading on the Security Identifier (SID)
-#### [ADSecurity](https://adsecurity.org/?p=1772) - Article on SID History injection
+#### <a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/78eb9013-1c3a-4970-ad1f-2b1dad588a25">[MS-DTYP]: SID | Microsoft Docs</a>
+Further reading on the Security Identifier (SID)
+#### [ADSecurity](https://adsecurity.org/?p=1772)
+Article on SID History injection
 #### [AD ACL Scanner](https://github.com/canix1/ADACLScanner)
