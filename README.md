@@ -6,7 +6,9 @@ Unknown SID, Orphaned SID or Unresolvable SID, all three terms cover the same is
 
 To understand what it is, you need to have a little insigth, and first need to know what a SID is.
 
-SID is an abbrevation for Security Identifier, below I display the SID for a ADUser, using PowerShell.
+### Basic SID 101
+
+SID is an abbrevation for Security Identifier, below is displayed the SID for a ADUser, using PowerShell:
 
 ```PowerShell
 PS C:\> (Get-ADUser Administrator).SID
@@ -15,8 +17,39 @@ BinaryLength AccountDomainSid                         Value
 ------------ ----------------                         -----                                       
           28 S-1-5-21-1234567890-123456789-1234567890 S-1-5-21-1234567890-123456789-1234567890-500
 ```
-> This is a sample SID for the domain administrator of our fictive AD. (Note: The builtin Administrator always ends with '-500')
+> This is a sample SID for the domain administrator of our fictive AD. (Tip: The builtin Administrator always ends with '-500')
 
-A SID uniquely identifies security principals, primarily *Computers*, *Groups* and *Users*, there are a few other objecttypes in AD that actually have objectsid's but for now we will focus on these primary three object types, since they are also the primary reason for our troubles. As seen on the PowerShell example above, the SID consists of two primary parts, the AccountDomainSid, which identifies the domain to which the object belongs, and the last part, which you could call the serial number for the security principal, and which is unique in the domain. There are a few more technical details in regard to the SID, but if you want to know more, you can go to the Microsoft Docs for more information.
+A SID uniquely identifies Security Principals, primarily *Computers*, *Groups* and *Users*, there are a few other objecttypes in your Active Directory that actually have objectsid's but for now we will focus on these primary three object types, since they are also the primary reason for our troubles. As seen on the PowerShell example above, the SID consists of two primary parts, the AccountDomainSid, which identifies the domain to which the object belongs, and the last part, which you could call the serial number for the Security Principal, which is unique in the domain. There are a few more technical details in regard to the SID, but if you want to know more, you can go to the Microsoft Docs for more information, in the [Links](#links) section.
 
-When referencing any of these Security Principals within the Domain, the SID will presented, and then 'looked up' by the through the Domain Controller, who will present the Identity related to the SID. Now, if the Domain Controller is not able to translate this SID into a Security Principal or Identity, I will just be displayed as the plain SID. Places where you normally see this is when you go into the Security Pane of your objects in your Active Directory Users and Computers console, here all it can be displayed either as just the SID, or as Unknown.
+When referencing any of these Security Principals within the Domain, the SID will presented, and then 'looked up' through a Domain Controller, who will present the Identity related to the SID. Now, if the Domain Controller is not able to translate this SID into a Security Principal, I will just be displayed as the plain SID. Places where you normally see this is when you go into the Security Pane of your objects in your Active Directory Users and Computers console, here all it can be displayed either as just the SID, or as "Account Unknown(S-1-5-21-1234567890-123456789-1234567890-2535)".
+
+### How do they become Unknown/Orphaned/Unresolvable?
+
+Well, as some might have figured out, since the SID are used to reference a Security Principal, if someone were to delete the Security Principal, the SID becomes unresolvable, and hence also unknown and therefore an orphan. Active Directory do not remove all the references to an object, since it the lookup works the other way around, so it will look up the Security Principal when it encounter a reference (SID) to it, but Active Directory will not really keep track of where these references are, if you delete a user or security group, which has delegated permissions all over your Active Directory, you will leave a lot of orphans.
+
+## Risk(s)
+
+What are the risks associated with this? **Total Domain Domination!** is a possibility, since as an article from ADSecurity (link in [Links](#links) section) discribes it's possible to injecting a SIDHistory reference on an user, and thereby obtaining the permissions of the SID you inject. Normally you would use this feature to inject the SID of a Domain Admin, somthing like this are noticed pretty easy, but if you have a lot of unresolved SIDs in the AD, with different permissions, you could leverage these with anyone really noticing. You can even encounter unresolved SIDs in some Security Groups, so simply by using these, an attacker could get membership of privileged groups, without changing the groups, and thereby bypass the changing of a privileged group, and not triggering the auditing of changes in membership.
+
+## Mitigation
+
+### Documented processes on deleting objects in Active Directory
+
+By simply remembering to remove groupmemberships of an Security Principal, you mitigate the former mentioned possibility of obtaining membership of an security group unnoticed, because by removing the memberships prior to deletion, the Security Principal is removed from the groups, not leaving am unresolved SID in the security groups, when it is deleted. So by having a documented process in creating and deleting users, you could actually mitigate a big part of the problem.
+
+### Remember to remove the SIDHistory from your Security Principals
+
+If you are a part of company that at some point in time have migrated either from one Active Directory to another, og if your company have merged with another company, and either migrated their Security Principals into your Active Directory, or the other way around, you should make sure that **ALL** the objects in your have had their SIDHistory cleared, since there no reason whatsoever, to not clearing the SIDHistory on the Security Principals in your Active Directory once a migration of Security Principals are complete.
+
+### Scan your ACL's on a regular basis
+
+Finally, and this is the one, that will make you cry, you should on a regular basis scan your Active Directory with a tool like ACLScanner (link in the [Links](#links) section) and go through this list
+
+##
+
+## Links
+
+Be aware that due to the nature of Github, and the way their links work, these links will not open in a new window, unless you press <CTRL> while clicking them.
+
+#### <a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/78eb9013-1c3a-4970-ad1f-2b1dad588a25">[MS-DTYP]: SID | Microsoft Docs</a> - Further reading on the Security Identifier (SID)
+#### [ADSecurity: Article on SID History injection](https://adsecurity.org/?p=1772)
