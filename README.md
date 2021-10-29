@@ -47,7 +47,7 @@ When referencing any of these Security Principals within the Domain, the SID wil
 
 ### How do they become Unknown/Orphaned/Unresolvable?
 
-Well, as some might have figured out, since the SID is used to reference a Security Principal, if someone were to delete the Security Principal, the SID becomes unresolvable, and hence also unknown and therefore an orphan. Active Directory do not remove all the references to an object, since it the lookup works the other way around, so it will look up the Security Principal when it encounter a reference (SID) to it, but Active Directory will not really keep track of where these references are, if you delete a user or security group, which has delegated permissions all over your Active Directory, you will leave a lot of orphans.
+Well, as some might have figured out, since the SID is used to reference a Security Principal, if someone were to delete the Security Principal, the SID becomes unresolvable, and hence also unknown and therefore an orphan. Active Directory does not remove all the references to an object, since the lookup works the other way around, so it will look up the Security Principal when it encounter a reference (SID) to it, but Active Directory will not really keep track of where these references are, if you delete a user or security group, which has delegated permissions all over your Active Directory, you will leave a lot of orphans.
 
 ## Risk(s)
 
