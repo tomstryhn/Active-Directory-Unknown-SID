@@ -18,6 +18,7 @@ Unknown SID, Orphaned SID or Unresolvable SID, all three terms cover the same is
       - [Getting ADObjects with a SIDHistory](#getting-adobjects-with-a-sidhistory)
       - [Example: Removing the SIDHistory from an ADUser](#example-removing-the-sidhistory-from-an-aduser)
     - [Scripts](#scripts)
+      - [Get-UnresolvableSIDsFromADObjectACLAccessRules](#get-unresolvablesidsfromadobjectaclaccessrules)
     - [Modules](#modules)
       - [ADObjectOwner](#adobjectowner)
   - [Links](#links)
