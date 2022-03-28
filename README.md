@@ -110,6 +110,7 @@ Get-ADUser UserNameWithSIDHistory -Properties SIDHistory | Foreach-Object { Set-
 ### Scripts
 
 #### [Get-UnresolvableSIDsFromADObjectACLAccessRules](https://github.com/tomstryhn/PowerShell/tree/main/ActiveDirectory/Get-UnresolvableSIDsFromADObjectACLAccessRules)
+A rather simple function that will return all the ADObjects containing a unique list of Unresolvable SIDs on that Object.
 
 ### Modules
 
